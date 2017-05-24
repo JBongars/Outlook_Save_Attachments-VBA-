@@ -1,3 +1,24 @@
+Option Explicit
+
+Public Type BROWSEINFO
+    hOwner As Long
+    pidlRoot As Long
+    pszDisplayName As String
+    lpszTitle As String
+    ulFlags As Long
+    lpfn As Long
+    lParam As Long
+    iImage As Long
+End Type
+ 
+ '32-bit API declarations
+Declare Function SHGetPathFromIDList Lib "shell32.dll" _
+Alias "SHGetPathFromIDListA" (ByVal pidl As Long, ByVal pszPath As String) _
+As Long
+ 
+Declare Function SHBrowseForFolder Lib "shell32.dll" _
+Alias "SHBrowseForFolderA" (lpBrowseInfo As BROWSEINFO) As Long
+
 Public Sub SaveAttachments()
 
     Dim objOL As Outlook.Application
@@ -7,12 +28,12 @@ Public Sub SaveAttachments()
     Dim i As Long
     Dim lngCount As Long
     Dim strFile As String
-    Dim strFodlerDir As String
+    Dim strFolderDir As String
     Dim strFolderpath As String
     Dim strDeletedFiles As String
     Dim Response As Variant
     
-    Dim ContainsAttachements As Boolean: ContainsAttachments = False
+    Dim ContainsAttachements As Boolean: ContainsAttachements = False
 
     ' Instantiate an Outlook Application object.
     Set objOL = CreateObject("Outlook.Application")
@@ -35,7 +56,7 @@ Public Sub SaveAttachments()
     On Error GoTo Error1
     ' Get the path to your My Documents folder
     
-    strFolderDir = GetDirectory.Main() & "\"
+    strFolderDir = GetDirectory() & "\"
         
     If strFolderDir = "\" Then
         strFolderpath = InputBox("No file selected." & Chr(10) & "Please enter the Filepath..")
@@ -124,6 +145,36 @@ Error1:
 Exit Sub
 
 End Sub
-
-
-
+                  
+ 
+Function GetDirectory(Optional Msg) As String
+    Dim bInfo As BROWSEINFO
+    Dim path As String
+    Dim r As Long, x As Long, pos As Integer
+     
+     '   Root folder = Desktop
+    bInfo.pidlRoot = 0&
+     
+     '   Title in the dialog
+    If IsMissing(Msg) Then
+        bInfo.lpszTitle = "Select a folder."
+    Else
+        bInfo.lpszTitle = Msg
+    End If
+     
+     '   Type of directory to return
+    bInfo.ulFlags = &H1
+     
+     '   Display the dialog
+    x = SHBrowseForFolder(bInfo)
+     
+     '   Parse the result
+    path = Space$(512)
+    r = SHGetPathFromIDList(ByVal x, ByVal path)
+    If r Then
+        pos = InStr(path, Chr$(0))
+        GetDirectory = Left(path, pos - 1)
+    Else
+        GetDirectory = ""
+    End If
+End Function
