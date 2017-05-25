@@ -28,7 +28,7 @@ Enable macros
 Create a new module and paste the source code within
 
     a) Press the ALT-F11 keys on your keyboard. the VBA Project Editor window should pop up
-    b) Drag and drop the source code anywhere inside the VBA Project Editor
+    b) Drag and drop your ".bas" file into the project exlorer (top left window). For ".bas" file, please refer to the above.
     
 Save macros as a new item on outlook
     
