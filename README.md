@@ -2,7 +2,7 @@
 Save all attachments from selected emails by running this script in VBA for Outlook.
 
 ------------------------------------------------------------------------------------
-'                              INSTALLATION GUIDE                                  '
+                               INSTALLATION GUIDE                                  
 ------------------------------------------------------------------------------------
 
 1. Open Outlook 2007 or newer on any machine
@@ -20,17 +20,21 @@ Enable macros
 Create a new module and paste the source code within
 
     a) Press the ALT-F11 keys on your keyboard. the VBA Project Editor window should pop up
-    b) Right click on "Project1" on the left hand side of the screen and select "Insert" > "Module" This will open a new tab titled "Module1"
-    c) - Optional - You can change the name from "Module1" to "Save_All_Attahements" by going to "Properties" at the bottom left hand side 
-        of the screen and changing the field marked "(Name)"
-    d) Copy the Source from this depository and paste anywhere inside the empty space in the VBA project window.
+    b) Drag and drop the source code anywhere inside the VBA Project Editor
     
 Save macros as a new item on outlook
+    
+    a) Go to "File" on the top left hand corner of the window
+    b) Select the "Option" tab on the left hand side (this may be different for outlook 2007 or older. A new window should pop up.
+    c) Select "Customize Ribbon on the left Pane.
+    d) Select "Macros" on the left drop-down menu and select "Project1.Project1.Save_all_attachments"
+    e) Finally select where you want to add your new custom too in the ribbon and press the "Add >>" button.
+    
 
 Done!
   
 ------------------------------------------------------------------------------------
-'                                   HOW TO USE                                     '
+                                   HOW TO USE                                     
 ------------------------------------------------------------------------------------
 
 1. Highlight multiple messages on Outlook.
@@ -42,7 +46,22 @@ Done!
 NOTE: There is a small bug where you might be redirected the the "My Documents" folder but this does not affect the functionality of this macros.
 
 ------------------------------------------------------------------------------------
-'                                  FINAL NOTES                                     '
+                                  THE MAKING OF                                     
 ------------------------------------------------------------------------------------
 
-Feel free to comment any suggestions for improvements below!
+The Problem
+
+During my time at work, I was tasked to upload hardcopies of old documents onto our server. This was fairly manual work. I would take huge binders of documents, remove each one and scan them. The problem was when I got back to my inbox to find several hundred emails from our scanner. I’m not going to just sit there, open each email, save the attachments and move on to the next. I’m going to write a macro to take care of that for me.
+
+Summary
+
+This project was an interesting one as it combined both Outlook’s VBA library and VB.NET to grab attachments from multiple emails and save them to a specific folder on the desktop. Later I was able to add functionality by customising which folder the end-user could save to and even create a new directory if the one provided didn’t exist. Although this was just a simple tool, I found it to be extremely productive when scanning large volumes of documents.
+
+How it works
+
+When the macro is initiated, it will prompt the end-user with directory explorer GUI. Once the user selected a directory, the function will convert the address of the selected directory into a string and closing it with a backslash. The user will then be prompted whether they want to create a new folder with the option to nest multiple folders by placing a backslash in between nested folders. A while loop with then cycle through the entered string and create a new directory for every folder that does not exist. Once a new string has been generated, the macro will then cycle through each attachment through each email and manually save the file by concatenate the directory string with the name of the attachment through a shell.
+
+On a Side Note
+
+This project was also quite terrifying as it gave me the paranoid possibility that this script could theoretically save the attachments of every email in my inbox to an unknown directory. Luckily this did not happen but just to be safe, I created a dummy outlook account as to limit the impact of a bug gone wrong.
+
