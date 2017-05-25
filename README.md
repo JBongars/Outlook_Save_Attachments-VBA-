@@ -25,12 +25,12 @@ Enable macros
     f) It is highly recommended that you select "Notifications for all macros" to prevent any security breaches but selecting 
       "Enable all macros" should work too.
 
-Create a new module and paste the source code within
+Add the source code to VBA as a new module
 
     a) Press the ALT-F11 keys on your keyboard. the VBA Project Editor window should pop up
     b) Drag and drop your ".bas" file into the project exlorer (top left window). For ".bas" file, please refer to the above.
     
-Save macros as a new item on outlook
+Save macros as a new command on outlook
     
     a) Go to "File" on the top left hand corner of the window
     b) Select the "Option" tab on the left hand side (this may be different for outlook 2007 or older. A new window should pop up.
