@@ -5,6 +5,14 @@ Save all attachments from selected emails by running this script in VBA for Outl
 '                               INSTALLATION GUIDE                                 ' 
 ------------------------------------------------------------------------------------
 
+Save main script as a (.bas) file
+    
+    a) Copy script and paste it in notepad (will be installed by default on any 'Windows' computer.
+    b) Click on "File" then "Save As". A new window should pop up.
+    c) Under the drop down that says "Save as type" select All Files.
+    d) Type "Save_all_attachments.bas" in the file name box and click save. 
+    NOTE: Be sure to note where you saved this file as you will beed it later
+
 Open Outlook 2007 or newer on any machine
 
 Enable macros
